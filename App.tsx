@@ -8,10 +8,12 @@ import {
   Pressable,
 } from "react-native";
 import React, { useState } from "react";
+import Loading from "./components/Loading";
 
 export default function App() {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -19,6 +21,7 @@ export default function App() {
 
       <Text style={styles.textStyle}>E-mail:</Text>
       <TextInput
+        inputMode="email"
         placeholder="Enter your e-mail"
         style={styles.textInputStyle}
         onChangeText={setMail}
@@ -31,10 +34,11 @@ export default function App() {
         style={styles.textInputStyle}
         onChangeText={setPassword}
         value={password}
+        secureTextEntry={true}
       />
 
       <Pressable
-        onPress={() => console.log("onpress")}
+        onPress={() => setIsLoading(true)}
         style={({ pressed }) => [
           {
             backgroundColor: pressed ? "#E07B39" : "#F29F58",
@@ -44,6 +48,9 @@ export default function App() {
       >
         <Text style={styles.loginButtonText}>Login</Text>
       </Pressable>
+
+      {isLoading ? <Loading /> : null}
+
       <StatusBar style="auto" />
     </View>
   );
@@ -64,7 +71,11 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: "#F29F58",
   },
-  textStyle: {},
+  textStyle: {
+    alignSelf: "flex-start",
+    marginLeft: "15%",
+    marginTop: 10,
+  },
   textInputStyle: {
     borderWidth: 1,
     width: "70%",
@@ -72,6 +83,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: 7,
     textAlign: "left",
+    paddingLeft: 10,
   },
   loginButton: {
     width: "70%",
@@ -79,7 +91,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: 10,
+    marginTop: 20,
   },
   loginButtonText: {
     color: "#FFF",
