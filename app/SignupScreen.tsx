@@ -10,6 +10,7 @@ import {
 import React, { useState } from "react";
 import Loading from "../components/Loading";
 import CustomTextInput from "../components/CustomTextInput";
+import CustomPressable from "../components/CustomPressable";
 
 const SignupScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -54,17 +55,10 @@ const SignupScreen = ({ navigation }) => {
         handlePlaceholder="Enter your password"
       />
 
-      <Pressable
-        onPress={() => setIsLoading(true)}
-        style={({ pressed }) => [
-          {
-            backgroundColor: pressed ? "#E07B39" : "#F29F58",
-          },
-          styles.signupButton,
-        ]}
-      >
-        <Text style={styles.signupButtonText}>Sign up</Text>
-      </Pressable>
+      <CustomPressable
+        buttonTitle="Sign up"
+        handleOnpress={() => setIsLoading(true)}
+      />
 
       <View style={styles.loginArea}>
         <Text>Already have an account?</Text>
@@ -92,20 +86,6 @@ const styles = StyleSheet.create({
   logo: {
     width: "60%",
     height: "15%",
-  },
-  signupButton: {
-    width: "70%",
-    height: 35,
-    borderRadius: 7,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 20,
-  },
-  signupButtonText: {
-    color: "#FFF",
-    textAlign: "center",
-    fontSize: 15,
-    fontWeight: "bold",
   },
   loginArea: {
     flexDirection: "row",
