@@ -114,5 +114,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 15,
   },
-  signUp: { color: "#1F509A", marginLeft: 5 },
+  signUp: { color: "#0A5EB0", marginLeft: 5 },
 });

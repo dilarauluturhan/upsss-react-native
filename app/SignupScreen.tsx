@@ -134,5 +134,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 15,
   },
-  login: { color: "#1F509A", marginLeft: 5 },
+  login: { color: "#0A5EB0", marginLeft: 5 },
 });
