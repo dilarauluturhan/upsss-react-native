@@ -10,7 +10,7 @@ import {
 import React, { useState } from "react";
 import Loading from "../components/Loading";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +51,7 @@ const LoginScreen = () => {
 
       <View style={styles.signupArea}>
         <Text>Don't have an account?</Text>
-        <Pressable>
+        <Pressable onPress={() => navigation.navigate("SignupScreen")}>
           <Text style={styles.signUp}>Sign up</Text>
         </Pressable>
       </View>
