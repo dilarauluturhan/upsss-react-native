@@ -1,6 +1,14 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 
-const CustomPressable = ({ buttonTitle, handleOnpress }) => {
+interface CustomPressableProps {
+  buttonTitle: string;
+  handleOnpress: () => void; // handleOnpress bir fonksiyon, parametresiz ve dönüş değeri void
+}
+
+const CustomPressable: React.FC<CustomPressableProps> = ({
+  buttonTitle,
+  handleOnpress,
+}) => {
   return (
     <>
       <Pressable

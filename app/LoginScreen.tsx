@@ -1,18 +1,27 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  Image,
-  Pressable,
-} from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React, { useState } from "react";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
 import Loading from "../components/Loading";
 import CustomTextInput from "../components/CustomTextInput";
 import CustomPressable from "../components/CustomPressable";
 
-const LoginScreen = ({ navigation }) => {
+type RootStackParamList = {
+  LoginScreen: undefined;
+  SignupScreen: undefined;
+};
+
+type LoginScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "LoginScreen"
+>;
+
+type LoginScreenProps = {
+  navigation: LoginScreenNavigationProp;
+};
+
+const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);

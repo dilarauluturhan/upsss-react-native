@@ -1,6 +1,14 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-const CustomTextInput = ({
+interface CustomTextInputProps {
+  title: string;
+  isSecureText: boolean;
+  handleOnchangeText: (text: string) => void; // onChangeText fonksiyonu, yeni metni alır ve işlem yapar
+  handleValue: string; // TextInput'un mevcut değeri
+  handlePlaceholder: string;
+}
+
+const CustomTextInput: React.FC<CustomTextInputProps> = ({
   title,
   isSecureText,
   handleOnchangeText,
