@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import Loading from "../components/Loading";
+import CustomTextInput from "../components/CustomTextInput";
 
 const SignupScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -21,40 +22,36 @@ const SignupScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../assets/logo.png")} />
 
-      <Text style={styles.textStyle}>Name:</Text>
-      <TextInput
-        inputMode="text"
-        placeholder="Enter your name"
-        style={styles.textInputStyle}
-        onChangeText={setMail}
-        value={mail}
+      <CustomTextInput
+        title="Name"
+        isSecureText={false}
+        handleOnchangeText={setName}
+        handleValue={name}
+        handlePlaceholder="Enter your name"
       />
 
-      <Text style={styles.textStyle}>Lastname:</Text>
-      <TextInput
-        inputMode="text"
-        placeholder="Enter your lastname"
-        style={styles.textInputStyle}
-        onChangeText={setMail}
-        value={mail}
+      <CustomTextInput
+        title="Lastname"
+        isSecureText={false}
+        handleOnchangeText={setLastname}
+        handleValue={lastname}
+        handlePlaceholder="Enter your lastname"
       />
 
-      <Text style={styles.textStyle}>E-mail:</Text>
-      <TextInput
-        inputMode="email"
-        placeholder="Enter your e-mail"
-        style={styles.textInputStyle}
-        onChangeText={setMail}
-        value={mail}
+      <CustomTextInput
+        title="E-mail"
+        isSecureText={false}
+        handleOnchangeText={setMail}
+        handleValue={mail}
+        handlePlaceholder="Enter your e-mail"
       />
 
-      <Text style={styles.textStyle}>Password:</Text>
-      <TextInput
-        placeholder="Enter your password"
-        style={styles.textInputStyle}
-        onChangeText={setPassword}
-        value={password}
-        secureTextEntry={true}
+      <CustomTextInput
+        title="Password"
+        isSecureText={true}
+        handleOnchangeText={setPassword}
+        handleValue={password}
+        handlePlaceholder="Enter your password"
       />
 
       <Pressable
@@ -63,10 +60,10 @@ const SignupScreen = ({ navigation }) => {
           {
             backgroundColor: pressed ? "#E07B39" : "#F29F58",
           },
-          styles.loginButton,
+          styles.signupButton,
         ]}
       >
-        <Text style={styles.loginButtonText}>Sign up</Text>
+        <Text style={styles.signupButtonText}>Sign up</Text>
       </Pressable>
 
       <View style={styles.loginArea}>
@@ -96,25 +93,7 @@ const styles = StyleSheet.create({
     width: "60%",
     height: "15%",
   },
-  headerText: {
-    fontSize: 32,
-    color: "#F29F58",
-  },
-  textStyle: {
-    alignSelf: "flex-start",
-    marginLeft: "15%",
-    marginTop: 10,
-  },
-  textInputStyle: {
-    borderWidth: 1,
-    width: "70%",
-    height: 40,
-    borderRadius: 10,
-    marginVertical: 7,
-    textAlign: "left",
-    paddingLeft: 10,
-  },
-  loginButton: {
+  signupButton: {
     width: "70%",
     height: 35,
     borderRadius: 7,
@@ -122,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
   },
-  loginButtonText: {
+  signupButtonText: {
     color: "#FFF",
     textAlign: "center",
     fontSize: 15,

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import Loading from "../components/Loading";
+import CustomTextInput from "../components/CustomTextInput";
 
 const LoginScreen = ({ navigation }) => {
   const [mail, setMail] = useState("");
@@ -19,22 +20,20 @@ const LoginScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../assets/logo.png")} />
 
-      <Text style={styles.textStyle}>E-mail:</Text>
-      <TextInput
-        inputMode="email"
-        placeholder="Enter your e-mail"
-        style={styles.textInputStyle}
-        onChangeText={setMail}
-        value={mail}
+      <CustomTextInput
+        title="E-mail"
+        isSecureText={false}
+        handleOnchangeText={setMail}
+        handleValue={mail}
+        handlePlaceholder="Enter your e-mail"
       />
 
-      <Text style={styles.textStyle}>Password:</Text>
-      <TextInput
-        placeholder="Enter your password"
-        style={styles.textInputStyle}
-        onChangeText={setPassword}
-        value={password}
-        secureTextEntry={true}
+      <CustomTextInput
+        title="Password"
+        isSecureText={true}
+        handleOnchangeText={setPassword}
+        handleValue={password}
+        handlePlaceholder="Enter your password"
       />
 
       <Pressable
@@ -75,24 +74,6 @@ const styles = StyleSheet.create({
   logo: {
     width: "60%",
     height: "15%",
-  },
-  headerText: {
-    fontSize: 32,
-    color: "#F29F58",
-  },
-  textStyle: {
-    alignSelf: "flex-start",
-    marginLeft: "15%",
-    marginTop: 10,
-  },
-  textInputStyle: {
-    borderWidth: 1,
-    width: "70%",
-    height: 40,
-    borderRadius: 10,
-    marginVertical: 7,
-    textAlign: "left",
-    paddingLeft: 10,
   },
   loginButton: {
     width: "70%",
