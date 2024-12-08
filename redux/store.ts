@@ -12,3 +12,4 @@ export type AppDispatch = typeof store.dispatch;
 
 // useDispatch = verileri göndermek
 // useSelector = içindeki initialState'i okumak için
+// ExtraReducers = asenkron gelen yapıların, cevap verilme süresi olan yapıların, süresinin kısalmasını sağlar

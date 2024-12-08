@@ -40,7 +40,6 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
   const { name, lastname, email, password, isLoading } = useSelector(
     (state: any) => state.user
   );
-
   const dispatch = useDispatch();
 
   return (
@@ -81,7 +80,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
 
       <CustomPressable
         buttonTitle="Create account"
-        handleOnpress={() => setIsLoading(true)}
+        handleOnpress={() => dispatch(setIsLoading(true))}
       />
 
       <View style={styles.loginArea}>
