@@ -13,6 +13,14 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Loading from "../components/Loading";
 import CustomTextInput from "../components/CustomTextInput";
 import CustomPressable from "../components/CustomPressable";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setName,
+  setLastname,
+  setEmail,
+  setPassword,
+  setIsLoading,
+} from "../redux/userSlice";
 
 type RootStackParamList = {
   LoginScreen: undefined;
@@ -29,11 +37,11 @@ type SignupScreenProps = {
 };
 
 const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
-  const [name, setName] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const { name, lastname, email, password, isLoading } = useSelector(
+    (state: any) => state.user
+  );
+
+  const dispatch = useDispatch();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -42,7 +50,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
       <CustomTextInput
         title="Name"
         isSecureText={false}
-        handleOnchangeText={setName}
+        handleOnchangeText={(text) => dispatch(setName(text))}
         handleValue={name}
         handlePlaceholder="Enter your name"
       />
@@ -50,7 +58,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
       <CustomTextInput
         title="Lastname"
         isSecureText={false}
-        handleOnchangeText={setLastname}
+        handleOnchangeText={(text) => dispatch(setLastname(text))}
         handleValue={lastname}
         handlePlaceholder="Enter your lastname"
       />
@@ -58,15 +66,15 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
       <CustomTextInput
         title="E-mail"
         isSecureText={false}
-        handleOnchangeText={setMail}
-        handleValue={mail}
+        handleOnchangeText={(text) => dispatch(setEmail(text))}
+        handleValue={email}
         handlePlaceholder="Enter your e-mail"
       />
 
       <CustomTextInput
         title="Password"
         isSecureText={true}
-        handleOnchangeText={setPassword}
+        handleOnchangeText={(password) => dispatch(setPassword(password))}
         handleValue={password}
         handlePlaceholder="Enter your password"
       />

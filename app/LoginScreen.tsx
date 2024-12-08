@@ -13,7 +13,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Loading from "../components/Loading";
 import CustomTextInput from "../components/CustomTextInput";
 import CustomPressable from "../components/CustomPressable";
-import { UseSelector, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setEmail, setPassword, setIsLoading } from "../redux/userSlice";
 
 type RootStackParamList = {
