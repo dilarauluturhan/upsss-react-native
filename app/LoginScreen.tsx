@@ -1,11 +1,20 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Pressable,
+  SafeAreaView,
+} from "react-native";
 import React, { useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import Loading from "../components/Loading";
 import CustomTextInput from "../components/CustomTextInput";
 import CustomPressable from "../components/CustomPressable";
+import { UseSelector, useDispatch, useSelector } from "react-redux";
+import { setEmail, setPassword, setIsLoading } from "../redux/userSlice";
 
 type RootStackParamList = {
   LoginScreen: undefined;
@@ -22,33 +31,37 @@ type LoginScreenProps = {
 };
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
-  const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  // userSlice içindeki verilerin okunması
+  const { email, password, isLoading } = useSelector(
+    (state: any) => state.user
+  );
+
+  // userSlice içerisindeki reducer yapılarını kullanma veya veri gönderme
+  const dispatch = useDispatch();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image style={styles.logo} source={require("../assets/logo.png")} />
 
       <CustomTextInput
         title="E-mail"
         isSecureText={false}
-        handleOnchangeText={setMail}
-        handleValue={mail}
+        handleOnchangeText={(text) => dispatch(setEmail(text))}
+        handleValue={email}
         handlePlaceholder="Enter your e-mail"
       />
 
       <CustomTextInput
         title="Password"
         isSecureText={true}
-        handleOnchangeText={setPassword}
+        handleOnchangeText={(password) => dispatch(setPassword(password))}
         handleValue={password}
         handlePlaceholder="Enter your password"
       />
 
       <CustomPressable
         buttonTitle="Login"
-        handleOnpress={() => setIsLoading(true)}
+        handleOnpress={() => dispatch(setIsLoading(true))}
       />
 
       <View style={styles.signupArea}>
@@ -61,7 +74,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       {isLoading ? <Loading /> : null}
 
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 };
 

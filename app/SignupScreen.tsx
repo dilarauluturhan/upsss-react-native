@@ -1,5 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Pressable,
+  SafeAreaView,
+} from "react-native";
 import React, { useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -29,7 +36,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image style={styles.logo} source={require("../assets/logo.png")} />
 
       <CustomTextInput
@@ -65,7 +72,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
       />
 
       <CustomPressable
-        buttonTitle="Sign up"
+        buttonTitle="Create account"
         handleOnpress={() => setIsLoading(true)}
       />
 
@@ -79,7 +86,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
       {isLoading ? <Loading /> : null}
 
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 };
 
