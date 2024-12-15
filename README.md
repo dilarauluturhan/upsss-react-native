@@ -19,11 +19,11 @@ To get the project up and running on your local machine, follow these steps:
 
 Clone the repository:
 ```
-git clone https://github.com/dilarauluturhan/rickandmorty-react-native.git
+git clone https://github.com/dilarauluturhan/upsss-react-native.git
 ```
 Go to the project directory:
 ```
-cd rickandmorty-react-native
+cd upsss-react-native
 ```
 Install the required dependencies:
 ```
