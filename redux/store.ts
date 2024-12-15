@@ -1,10 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "../redux/userSlice";
+import { thunk } from "redux-thunk";
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
   },
+  middleware: (getDefaultMiddlware) =>
+    getDefaultMiddlware({ serializableCheck: false }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
