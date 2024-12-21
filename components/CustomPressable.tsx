@@ -12,7 +12,7 @@ const CustomPressable: React.FC<CustomPressableProps> = ({
   return (
     <>
       <Pressable
-        onPress={handleOnpress}
+        onPress={() => handleOnpress()}
         style={({ pressed }) => [
           {
             backgroundColor: pressed ? "#E07B39" : "#F29F58",
