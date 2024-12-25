@@ -5,6 +5,7 @@ import {
   addDoc,
   getDocs,
   doc,
+  updateDoc,
   deleteDoc,
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
@@ -40,7 +41,20 @@ const HomepageScreen = () => {
 
   // delete data from firebase
   const deleteData = async () => {
-    await deleteDoc(doc(db, "upsssTrying", "4L4XbBKhncvg6ELccUeJ"));
+    await deleteDoc(doc(db, "upsssTrying", "rP0MaaSaDI1m0bNVKPoy"));
+  };
+
+  // update data from firebase
+  const updateData = async () => {
+    try {
+      const upsssRef = doc(db, "upsssTrying", "LQ2Foh2UZcUcClHwWrd1");
+
+      await updateDoc(upsssRef, {
+        born: 1997,
+      });
+    } catch (error) {
+      console.log("error:", error);
+    }
   };
 
   return (
@@ -50,6 +64,7 @@ const HomepageScreen = () => {
       <CustomPressable buttonTitle={"Save"} handleOnpress={sendData} />
       <CustomPressable buttonTitle={"Get Data"} handleOnpress={getData} />
       <CustomPressable buttonTitle={"Delete"} handleOnpress={deleteData} />
+      <CustomPressable buttonTitle={"Update Data"} handleOnpress={updateData} />
     </View>
   );
 };
