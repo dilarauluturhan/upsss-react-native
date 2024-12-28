@@ -13,6 +13,8 @@
 - **redux toolkit**
 - **redux-thunk**
 - **firebase**
+- **axios**
+- **json-server**
 
 ## Getting Started
 To get the project up and running on your local machine, follow these steps:
