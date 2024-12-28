@@ -19,6 +19,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
     <View style={styles.container}>
       <Text style={styles.textStyle}>{title}:</Text>
       <TextInput
+        autoCapitalize="none"
         secureTextEntry={isSecureText}
         placeholder={handlePlaceholder}
         style={styles.textInputStyle}

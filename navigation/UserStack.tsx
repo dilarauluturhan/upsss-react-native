@@ -5,6 +5,7 @@ import NotificationScreen from "../app/NotificationScreen";
 import CartScreen from "../app/CartScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import CustomHeader from "../components/CustomHeader";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,15 +15,22 @@ const UserStack = () => {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
+        tabBarActiveTintColor: "#E07B39",
+        tabBarInactiveTintColor: "gray",
+        tabBarStyle: {
+          height: 80,
+          paddingTop: 10,
+        },
       }}
     >
       <Tab.Screen
         name="HomepageScreen"
         component={HomepageScreen}
         options={{
-          title: "Home",
+          headerShown: true,
+          headerTitle: () => <CustomHeader />,
           tabBarIcon: ({ color }) => (
-            <Ionicons name="home-outline" size={22} color={color} />
+            <Ionicons name="home-outline" size={24} color={color} />
           ),
         }}
       />
@@ -32,7 +40,7 @@ const UserStack = () => {
         options={{
           title: "Explore",
           tabBarIcon: ({ color }) => (
-            <Ionicons name="search-outline" size={22} color={color} />
+            <Ionicons name="search-outline" size={24} color={color} />
           ),
         }}
       />
@@ -42,7 +50,7 @@ const UserStack = () => {
         options={{
           title: "Notification",
           tabBarIcon: ({ color }) => (
-            <Ionicons name="notifications-outline" size={22} color={color} />
+            <Ionicons name="notifications-outline" size={24} color={color} />
           ),
         }}
       />
@@ -53,8 +61,15 @@ const UserStack = () => {
           title: "Cart",
           tabBarBadge: 3,
           tabBarIcon: ({ color }) => (
-            <Ionicons name="cart-outline" size={22} color={color} />
+            <Ionicons name="cart-outline" size={24} color={color} />
           ),
+          tabBarBadgeStyle: {
+            backgroundColor: "#E07B39",
+            color: "white",
+            width: 12,
+            height: 18,
+            fontSize:12
+          },
         }}
       />
       <Tab.Screen
@@ -63,7 +78,7 @@ const UserStack = () => {
         options={{
           title: "Profile",
           tabBarIcon: ({ color }) => (
-            <Ionicons name="person-outline" size={22} color={color} />
+            <Ionicons name="person-outline" size={24} color={color} />
           ),
         }}
       />

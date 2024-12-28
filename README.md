@@ -15,6 +15,11 @@
 - **firebase**
 - **axios**
 - **json-server**
+- **expo/vector-icons**
+- **expo-linear-gradient**
+- **react-native-svg**
+- **react-native-svg-transformer**
+- **expo-linear-gradient**
 
 ## Getting Started
 To get the project up and running on your local machine, follow these steps:
