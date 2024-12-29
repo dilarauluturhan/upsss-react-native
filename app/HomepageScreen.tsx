@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -14,6 +15,8 @@ import { Colors } from "../constant/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import Categories from "../components/Categories";
+import FlashSale from "../components/FlashSale";
+import Loading from "../components/Loading";
 
 type Props = {
   item: ProductType;
@@ -25,11 +28,13 @@ const width = Dimensions.get("window").width - 40;
 const HomepageScreen = (props: Props) => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [saleProducts, setSaleProducts] = useState<ProductType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getCategories();
     getProducts();
+    getSaleProducts();
   }, []);
 
   const getProducts = async () => {
@@ -39,6 +44,7 @@ const HomepageScreen = (props: Props) => {
     setProducts(response.data);
     setIsLoading(false);
   };
+
   const getCategories = async () => {
     const URL = `http://localhost:8000/categories`;
     const response = await axios.get(URL);
@@ -47,45 +53,77 @@ const HomepageScreen = (props: Props) => {
     setIsLoading(false);
   };
 
-  return (
-    <Animated.View
-      entering={FadeInDown.delay(300).duration(500)}
-      style={styles.generalContainer}
-    >
-      <Categories categories={categories} />
+  const getSaleProducts = async () => {
+    const URL = `http://localhost:8000/saleProducts`;
+    const response = await axios.get(URL);
 
-      <View style={styles.titleWrapper}>
-        <Text style={styles.title}>For You</Text>
-        <TouchableOpacity>
-          <Text style={styles.titleBtn}>See All</Text>
-        </TouchableOpacity>
-      </View>
-      <FlatList
-        data={products}
-        numColumns={2}
-        columnWrapperStyle={{
-          justifyContent: "space-between",
-          marginBottom: 20,
-        }}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ index, item }) => (
-          <View style={styles.container}>
-            <Image source={{ uri: item.images[0] }} style={styles.productImg} />
-            <TouchableOpacity style={styles.bookmarkBtn}>
-              <Ionicons name="heart-outline" size={24} color={Colors.primary} />
-            </TouchableOpacity>
-            <View style={styles.productInfo}>
-              <Text style={styles.price}>${item.price}</Text>
-              <View style={styles.ratingWrapper}>
-                <Ionicons name="star" size={17} color={"#D4AF37"} />
-                <Text style={styles.rating}>4.7</Text>
+    setSaleProducts(response.data);
+    setIsLoading(false);
+  };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  return (
+    <ScrollView>
+      <Animated.View
+        entering={FadeInDown.delay(300).duration(500)}
+        style={styles.generalContainer}
+      >
+        <Categories categories={categories} />
+
+        <FlashSale products={saleProducts} />
+
+        <View style={{ marginHorizontal: 10, marginBottom: 10 }}>
+          <Image
+            source={require("../assets/sale-banner.jpg")}
+            style={{ width: "100%", height: 150, borderRadius: 14 }}
+          />
+        </View>
+
+        {/* product list */}
+        <View style={styles.titleWrapper}>
+          <Text style={styles.title}>For You</Text>
+          <TouchableOpacity>
+            <Text style={styles.titleBtn}>See All</Text>
+          </TouchableOpacity>
+        </View>
+        <FlatList
+          data={products}
+          numColumns={2}
+          columnWrapperStyle={{
+            justifyContent: "space-between",
+            marginBottom: 20,
+          }}
+          keyExtractor={(item) => item.id.toString()}
+          nestedScrollEnabled={true}
+          renderItem={({ index, item }) => (
+            <View style={styles.container}>
+              <Image
+                source={{ uri: item.images[0] }}
+                style={styles.productImg}
+              />
+              <TouchableOpacity style={styles.bookmarkBtn}>
+                <Ionicons
+                  name="heart-outline"
+                  size={24}
+                  color={Colors.primary}
+                />
+              </TouchableOpacity>
+              <View style={styles.productInfo}>
+                <Text style={styles.price}>${item.price}</Text>
+                <View style={styles.ratingWrapper}>
+                  <Ionicons name="star" size={17} color={"#D4AF37"} />
+                  <Text style={styles.rating}>4.7</Text>
+                </View>
               </View>
+              <Text style={styles.productTitle}>{item.title}</Text>
             </View>
-            <Text style={styles.productTitle}>{item.title}</Text>
-          </View>
-        )}
-      />
-    </Animated.View>
+          )}
+        />
+      </Animated.View>
+    </ScrollView>
   );
 };
 
@@ -143,6 +181,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 10,
+    marginHorizontal: 10,
   },
   title: {
     fontSize: 15,

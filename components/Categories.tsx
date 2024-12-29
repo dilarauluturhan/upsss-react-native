@@ -29,6 +29,7 @@ const Categories = ({ categories }: Props) => {
         horizontal
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}
+        nestedScrollEnabled={true}
         renderItem={({ index, item }) => (
           <TouchableOpacity>
             <View style={styles.item}>
@@ -37,7 +38,7 @@ const Categories = ({ categories }: Props) => {
             </View>
           </TouchableOpacity>
         )}
-      ></FlatList>
+      />
     </View>
   );
 };
@@ -52,8 +53,8 @@ const styles = StyleSheet.create({
   titleWrapper: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 10,
-    marginHorizontal: 20,
+    marginBottom: 5,
+    marginHorizontal: 10,
   },
   title: {
     fontSize: 15,
