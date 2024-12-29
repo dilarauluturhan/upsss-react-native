@@ -68,7 +68,7 @@ const UserStack = () => {
             color: "white",
             width: 12,
             height: 18,
-            fontSize:12
+            fontSize: 12,
           },
         }}
       />

@@ -16,7 +16,7 @@ type Props = {
 
 const Categories = ({ categories }: Props) => {
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.titleWrapper}>
         <Text style={styles.title}>Categories</Text>
         <TouchableOpacity>
@@ -27,12 +27,15 @@ const Categories = ({ categories }: Props) => {
       <FlatList
         data={categories}
         horizontal
+        showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ index, item }) => (
-          <View>
-            <Image source={{ uri: item.image }} style={styles.itemImg} />
-            <Text>{item.name}</Text>
-          </View>
+          <TouchableOpacity>
+            <View style={styles.item}>
+              <Image source={{ uri: item.image }} style={styles.itemImg} />
+              <Text>{item.name}</Text>
+            </View>
+          </TouchableOpacity>
         )}
       ></FlatList>
     </View>
@@ -42,6 +45,10 @@ const Categories = ({ categories }: Props) => {
 export default Categories;
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.white,
+    marginTop: 10,
+  },
   titleWrapper: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -65,5 +72,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 30,
     backgroundColor: Colors.lightGray,
+  },
+  item: {
+    marginVertical: 10,
+    gap: 5,
+    alignItems: "center",
+    marginLeft: 20,
   },
 });

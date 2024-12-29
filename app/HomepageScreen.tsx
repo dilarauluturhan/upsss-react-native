@@ -53,7 +53,7 @@ const HomepageScreen = (props: Props) => {
       style={styles.generalContainer}
     >
       <Categories categories={categories} />
-      
+
       <View style={styles.titleWrapper}>
         <Text style={styles.title}>For You</Text>
         <TouchableOpacity>
@@ -93,12 +93,12 @@ export default HomepageScreen;
 
 const styles = StyleSheet.create({
   generalContainer: {
-    marginHorizontal: 10,
     backgroundColor: Colors.white,
   },
   container: {
     backgroundColor: Colors.white,
     width: width / 2,
+    marginHorizontal: 10,
   },
   productImg: {
     width: "100%",
