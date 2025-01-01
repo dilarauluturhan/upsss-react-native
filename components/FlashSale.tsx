@@ -10,12 +10,15 @@ import React, { useState, useEffect } from "react";
 import { Colors } from "../constant/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { ProductType } from "../types/type";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   products: ProductType[];
 };
 
 const FlashSale = ({ products }: Props) => {
+  const navigation = useNavigation();
+
   const saleEndDate = new Date();
   saleEndDate.setDate(saleEndDate.getDate() + 2);
   saleEndDate.setHours(23, 59, 59);
@@ -90,20 +93,33 @@ const FlashSale = ({ products }: Props) => {
         keyExtractor={(item) => item.id.toString()}
         nestedScrollEnabled={true}
         renderItem={({ index, item }) => (
-          <View style={styles.productWrapper}>
-            <Image source={{ uri: item.images[0] }} style={styles.productImg} />
-            <TouchableOpacity style={styles.bookmarkBtn}>
-              <Ionicons name="heart-outline" size={24} color={Colors.primary} />
-            </TouchableOpacity>
-            <View style={styles.productInfo}>
-              <Text style={styles.price}>${item.price}</Text>
-              <View style={styles.ratingWrapper}>
-                <Ionicons name="star" size={14} color={"#D4AF37"} />
-                <Text style={styles.rating}>4.7</Text>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("ProductDetails", { product: item })
+            }
+          >
+            <View style={styles.productWrapper}>
+              <Image
+                source={{ uri: item.images[0] }}
+                style={styles.productImg}
+              />
+              <TouchableOpacity style={styles.bookmarkBtn}>
+                <Ionicons
+                  name="heart-outline"
+                  size={24}
+                  color={Colors.primary}
+                />
+              </TouchableOpacity>
+              <View style={styles.productInfo}>
+                <Text style={styles.price}>${item.price}</Text>
+                <View style={styles.ratingWrapper}>
+                  <Ionicons name="star" size={14} color={"#D4AF37"} />
+                  <Text style={styles.rating}>4.7</Text>
+                </View>
               </View>
+              <Text style={styles.productTitle}>{item.title}</Text>
             </View>
-            <Text style={styles.productTitle}>{item.title}</Text>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>
