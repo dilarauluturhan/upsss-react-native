@@ -1,26 +1,34 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, Button } from "react-native";
+import { ProductType } from "../types/type";
+import ImageSlider from "../components/ImageSlider";
 
 const ProductDetailsScreen = ({ route, navigation }) => {
   const { product } = route.params;
+  const [getProduct, setGetProduct] = useState<ProductType>({});
+
+  useEffect(() => {
+    getProductDetails();
+  }, []);
+
+  const getProductDetails = async () => {
+    const URL = `http://localhost:8000/saleProducts/${product}`;
+    const response = await axios.get(URL);
+
+    setGetProduct(response.data);
+  };
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: product.images[0] }} style={styles.image} />
-      <Text style={styles.title}>{product.title}</Text>
-      <Text style={styles.price}>${product.price}</Text>
-      <Text style={styles.description}>{product.description}</Text>
-      <Button title="Go Back" onPress={() => navigation.goBack()} />
+      {product && <ImageSlider imageList={product.images} />}
+      {product && <Text>{product.title}</Text>}
     </View>
   );
 };
 
+export default ProductDetailsScreen;
+
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20 },
-  image: { width: "100%", height: 200, marginBottom: 20 },
-  title: { fontSize: 20, fontWeight: "bold" },
-  price: { fontSize: 18, color: "green", marginVertical: 10 },
-  description: { fontSize: 16 },
 });
-
-export default ProductDetailsScreen;
