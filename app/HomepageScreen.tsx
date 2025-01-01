@@ -17,6 +17,7 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 import Categories from "../components/Categories";
 import FlashSale from "../components/FlashSale";
 import Loading from "../components/Loading";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   item: ProductType;
@@ -26,6 +27,8 @@ type Props = {
 const width = Dimensions.get("window").width - 40;
 
 const HomepageScreen = (props: Props) => {
+  const navigation = useNavigation();
+
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [saleProducts, setSaleProducts] = useState<ProductType[]>([]);
@@ -99,27 +102,33 @@ const HomepageScreen = (props: Props) => {
           keyExtractor={(item) => item.id.toString()}
           nestedScrollEnabled={true}
           renderItem={({ index, item }) => (
-            <View style={styles.container}>
-              <Image
-                source={{ uri: item.images[0] }}
-                style={styles.productImg}
-              />
-              <TouchableOpacity style={styles.bookmarkBtn}>
-                <Ionicons
-                  name="heart-outline"
-                  size={24}
-                  color={Colors.primary}
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("ProductDetails", { product: item })
+              }
+            >
+              <View style={styles.container}>
+                <Image
+                  source={{ uri: item.images[0] }}
+                  style={styles.productImg}
                 />
-              </TouchableOpacity>
-              <View style={styles.productInfo}>
-                <Text style={styles.price}>${item.price}</Text>
-                <View style={styles.ratingWrapper}>
-                  <Ionicons name="star" size={17} color={"#D4AF37"} />
-                  <Text style={styles.rating}>4.7</Text>
+                <TouchableOpacity style={styles.bookmarkBtn}>
+                  <Ionicons
+                    name="heart-outline"
+                    size={24}
+                    color={Colors.primary}
+                  />
+                </TouchableOpacity>
+                <View style={styles.productInfo}>
+                  <Text style={styles.price}>${item.price}</Text>
+                  <View style={styles.ratingWrapper}>
+                    <Ionicons name="star" size={17} color={"#D4AF37"} />
+                    <Text style={styles.rating}>4.7</Text>
+                  </View>
                 </View>
+                <Text style={styles.productTitle}>{item.title}</Text>
               </View>
-              <Text style={styles.productTitle}>{item.title}</Text>
-            </View>
+            </TouchableOpacity>
           )}
         />
       </Animated.View>
