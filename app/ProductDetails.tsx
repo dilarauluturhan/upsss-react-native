@@ -13,6 +13,7 @@ import { ProductType } from "../types/type";
 import ImageSlider from "../components/ImageSlider";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../constant/Colors";
+import Animated, { FadeInDown } from "react-native-reanimated";
 
 const ProductDetailsScreen = ({ route, navigation }) => {
   const { product } = route.params;
@@ -35,7 +36,10 @@ const ProductDetailsScreen = ({ route, navigation }) => {
         {product && <ImageSlider imageList={product.images} />}
         {product && (
           <View style={styles.container}>
-            <View style={styles.ratingWrapper}>
+            <Animated.View
+              entering={FadeInDown.delay(300).duration(500)}
+              style={styles.ratingWrapper}
+            >
               <View style={styles.ratingWrapper}>
                 <Ionicons name="star" size={18} color={"#D4AF37"} />
                 <Text style={styles.rating}>4.7</Text>
@@ -44,21 +48,37 @@ const ProductDetailsScreen = ({ route, navigation }) => {
               <TouchableOpacity>
                 <Ionicons name="heart-outline" size={20} color={Colors.black} />
               </TouchableOpacity>
-            </View>
+            </Animated.View>
 
-            <Text style={styles.title}>{product.title}</Text>
+            <Animated.Text
+              entering={FadeInDown.delay(700).duration(500)}
+              style={styles.title}
+            >
+              {product.title}
+            </Animated.Text>
 
-            <View style={styles.priceWrapper}>
+            <Animated.View
+              entering={FadeInDown.delay(900).duration(500)}
+              style={styles.priceWrapper}
+            >
               <Text style={styles.price}>${product.price}</Text>
               <View style={styles.priceDiscount}>
                 <Text style={styles.priceDiscountText}>6% Off</Text>
               </View>
               <Text style={styles.oldPrice}>${product.price + 2}</Text>
-            </View>
+            </Animated.View>
 
-            <Text style={styles.description}>{product.description}</Text>
+            <Animated.Text
+              entering={FadeInDown.delay(1100).duration(500)}
+              style={styles.description}
+            >
+              {product.description}
+            </Animated.Text>
 
-            <View style={styles.productVariationWrapper}>
+            <Animated.View
+              entering={FadeInDown.delay(1300).duration(500)}
+              style={styles.productVariationWrapper}
+            >
               <View style={styles.productVariationType}>
                 <Text style={styles.productVariationTypeTitle}>Color</Text>
                 <View style={styles.productVariationValueWrapper}>
@@ -128,7 +148,7 @@ const ProductDetailsScreen = ({ route, navigation }) => {
                   </View>
                 </View>
               </View>
-            </View>
+            </Animated.View>
           </View>
         )}
       </ScrollView>
