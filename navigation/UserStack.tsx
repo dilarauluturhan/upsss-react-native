@@ -51,6 +51,8 @@ const UserStack = () => {
         component={NotificationScreen}
         options={{
           title: "Notification",
+          headerShown: true,
+          headerTransparent: true,
           tabBarIcon: ({ color }) => (
             <Ionicons name="notifications-outline" size={24} color={color} />
           ),

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { CategoryType } from "../types/type";
 import { Colors } from "../constant/Colors";
+import Animated, { FadeInDown } from "react-native-reanimated";
 
 type Props = {};
 
@@ -27,7 +28,10 @@ const ExploreScreen = (props: Props) => {
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item, index }) => (
-          <View style={styles.itemWrapper}>
+          <Animated.View
+            entering={FadeInDown.delay(300 + index * 100).duration(500)}
+            style={styles.itemWrapper}
+          >
             <Text style={styles.itemTitle}>{item.name}</Text>
             <Image
               source={{ uri: item.image }}
@@ -38,7 +42,7 @@ const ExploreScreen = (props: Props) => {
                 marginRight: 7,
               }}
             />
-          </View>
+          </Animated.View>
         )}
       />
     </View>
