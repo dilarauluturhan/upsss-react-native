@@ -19,7 +19,6 @@ const width = Dimensions.get("screen").width;
 const ImageSlider = ({ imageList }: Props) => {
   const [paginationIndex, setPaginationIndex] = useState(0);
 
-  // onViewableItemsChanged fonksiyonunu useRef ile sabitliyoruz
   const onViewableItemsChanged = useRef(
     ({ viewableItems }: { viewableItems: ViewToken[] }) => {
       if (viewableItems.length > 0) {
@@ -28,9 +27,8 @@ const ImageSlider = ({ imageList }: Props) => {
     }
   ).current;
 
-  // viewabilityConfig'i de useRef ile sabitliyoruz
   const viewabilityConfig = useRef({
-    viewAreaCoveragePercentThreshold: 50, // Görünürlük için yüzde eşik
+    viewAreaCoveragePercentThreshold: 50,
   }).current;
 
   return (
