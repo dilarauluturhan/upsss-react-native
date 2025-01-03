@@ -20,6 +20,7 @@ const RootStack = () => {
         component={ProductDetailsScreen}
         options={({ navigation }) => ({
           headerShown: true,
+          headerTransparent: true,
           title: "Product Details",
           headerLeft: () => (
             <TouchableOpacity

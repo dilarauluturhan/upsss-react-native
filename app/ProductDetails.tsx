@@ -31,7 +31,7 @@ const ProductDetailsScreen = ({ route, navigation }) => {
   };
 
   return (
-    <View style={{ backgroundColor: Colors.white }}>
+    <View style={{ backgroundColor: Colors.white, marginTop: 110 }}>
       <ScrollView style={{ marginBottom: 120 }}>
         {product && <ImageSlider imageList={product.images} />}
         {product && (

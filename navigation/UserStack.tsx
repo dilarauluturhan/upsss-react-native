@@ -39,6 +39,8 @@ const UserStack = () => {
         component={ExploreScreen}
         options={{
           title: "Explore",
+          headerShown: true,
+          headerTransparent: true,
           tabBarIcon: ({ color }) => (
             <Ionicons name="search-outline" size={24} color={color} />
           ),
