@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React, { useRef, useState } from "react";
 import Pagination from "./Pagination";
+import { Colors } from "../constant/Colors";
 
 type Props = {
   imageList: string[];
@@ -32,7 +33,7 @@ const ImageSlider = ({ imageList }: Props) => {
   }).current;
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={imageList}
         renderItem={({ item }) => (
@@ -43,10 +44,7 @@ const ImageSlider = ({ imageList }: Props) => {
               alignItems: "center",
             }}
           >
-            <Image
-              source={{ uri: item }}
-              style={{ width: 300, height: 300, borderRadius: 15 }}
-            />
+            <Image source={{ uri: item }} style={{ width: 430, height: 300 }} />
           </View>
         )}
         horizontal
@@ -62,4 +60,8 @@ const ImageSlider = ({ imageList }: Props) => {
 
 export default ImageSlider;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.white,
+  },
+});

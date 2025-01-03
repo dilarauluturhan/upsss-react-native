@@ -30,8 +30,8 @@ const ProductDetailsScreen = ({ route, navigation }) => {
   };
 
   return (
-    <>
-      <ScrollView>
+    <View style={{ backgroundColor: Colors.white }}>
+      <ScrollView style={{ marginBottom: 120 }}>
         {product && <ImageSlider imageList={product.images} />}
         {product && (
           <View style={styles.container}>
@@ -94,12 +94,6 @@ const ProductDetailsScreen = ({ route, navigation }) => {
                   <View
                     style={[
                       styles.productVariationColorValue,
-                      { backgroundColor: "#FFE893" },
-                    ]}
-                  />
-                  <View
-                    style={[
-                      styles.productVariationColorValue,
                       { backgroundColor: "#AE445A" },
                     ]}
                   />
@@ -123,11 +117,8 @@ const ProductDetailsScreen = ({ route, navigation }) => {
                         },
                       ]}
                     >
-                      S
+                      M
                     </Text>
-                  </View>
-                  <View style={styles.productVariationSizeValue}>
-                    <Text style={styles.productVariationSizeValueText}>M</Text>
                   </View>
                   <View style={styles.productVariationSizeValue}>
                     <Text style={styles.productVariationSizeValueText}>L</Text>
@@ -141,7 +132,28 @@ const ProductDetailsScreen = ({ route, navigation }) => {
           </View>
         )}
       </ScrollView>
-    </>
+
+      <View style={styles.buttonWrapper}>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            {
+              backgroundColor: Colors.white,
+              borderColor: Colors.primary,
+              borderWidth: 1,
+            },
+          ]}
+        >
+          <Text style={[styles.buttonText, { color: Colors.primary }]}>
+            Add to Cart
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Buy Now</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
@@ -150,6 +162,7 @@ export default ProductDetailsScreen;
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
+    backgroundColor: Colors.white,
   },
   ratingWrapper: {
     flexDirection: "row",
@@ -198,7 +211,7 @@ const styles = StyleSheet.create({
     color: Colors.gray,
   },
   description: {
-    marginTop: 20,
+    marginTop: 13,
     fontSize: 16,
     fontWeight: "400",
     color: Colors.black,
@@ -207,6 +220,8 @@ const styles = StyleSheet.create({
   },
   productVariationWrapper: {
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 20,
     flexWrap: "wrap",
   },
@@ -233,18 +248,48 @@ const styles = StyleSheet.create({
     backgroundColor: "#C7C8CC",
   },
   productVariationSizeValue: {
-    width: 50,
-    height: 30,
-    borderRadius: 5,
-    backgroundColor: "#DEDEDE",
+    width: 35,
+    height: 35,
+    borderRadius: 100,
+    backgroundColor: "#EEE",
     justifyContent: "center",
     alignItems: "center",
-    borderColor: Colors.lightGray,
+    borderColor: "#C7C8CC",
     borderWidth: 1,
   },
   productVariationSizeValueText: {
     fontSize: 16,
     fontWeight: "500",
     color: Colors.black,
+  },
+  buttonWrapper: {
+    position: "absolute",
+    height: 110,
+    padding: 30,
+    bottom: 0,
+    width: "100%",
+    backgroundColor: Colors.white,
+    flexDirection: "row",
+    gap: 10,
+  },
+  button: {
+    flex: 1,
+    backgroundColor: Colors.primary,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
+    shadowColor: Colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: "400",
+    color: Colors.white,
   },
 });
