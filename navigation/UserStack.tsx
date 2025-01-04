@@ -63,6 +63,8 @@ const UserStack = () => {
         component={CartScreen}
         options={{
           title: "Cart",
+          headerShown: true,
+          headerTransparent: true,
           tabBarBadge: 3,
           tabBarIcon: ({ color }) => (
             <Ionicons name="cart-outline" size={24} color={color} />
