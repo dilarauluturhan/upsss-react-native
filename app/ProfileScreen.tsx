@@ -1,11 +1,26 @@
-import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Pressable,
+} from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../constant/Colors";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/userSlice";
 
 type Props = {};
 
 const ProfileScreen = (props: Props) => {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <View style={styles.container}>
       <View style={{ alignItems: "center" }}>
@@ -51,7 +66,7 @@ const ProfileScreen = (props: Props) => {
           <Ionicons name="settings-outline" size={22} color={Colors.primary} />
           <Text style={styles.buttonText}>Settings</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity onPress={handleLogout} style={styles.button}>
           <Ionicons name="log-out-outline" size={22} color={Colors.primary} />
           <Text style={styles.buttonText}>Logout</Text>
         </TouchableOpacity>

@@ -1,7 +1,12 @@
 // async thunk, bir fonksiyonu çağırdığımızda cevap gelme süresi boyunca beklememizi sağlıyor
 // bunun için de üç farklı seçenek sunuyor: yükleniyor, yüklendi, reddedildi
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAuth, signInWithEmailAndPassword, User } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  User,
+  signOut,
+} from "firebase/auth";
 
 interface LoginPayload {
   email: string;
@@ -34,11 +39,22 @@ export const login = createAsyncThunk<LoginResponse, LoginPayload>(
 
       return userData;
     } catch (error) {
-      console.log("userSlice 21 line:", error);
+      console.log("userSlice error:", error);
       throw error;
     }
   }
 );
+
+export const logout = createAsyncThunk("user/logout", async () => {
+  try {
+    const auth = getAuth();
+    await signOut(auth);
+
+    return null;
+  } catch (error) {
+    throw error;
+  }
+});
 
 export interface UserState {
   name: any;
@@ -105,7 +121,21 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.isAuth = false;
         state.error = action.error.message;
-      }); // başarısız
+      }) // başarısız
+
+      .addCase(logout.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isAuth = false;
+        state.token = null;
+        state.error = null;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
   },
 });
 
