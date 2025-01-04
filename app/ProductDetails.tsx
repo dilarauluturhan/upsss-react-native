@@ -36,8 +36,14 @@ const ProductDetailsScreen = ({ route, navigation }) => {
         {product && <ImageSlider imageList={product.images} />}
         {product && (
           <View style={styles.container}>
+            <Animated.Text
+              entering={FadeInDown.delay(500).duration(500)}
+              style={styles.title}
+            >
+              {product.title}
+            </Animated.Text>
             <Animated.View
-              entering={FadeInDown.delay(300).duration(500)}
+              entering={FadeInDown.delay(700).duration(500)}
               style={styles.ratingWrapper}
             >
               <View style={styles.ratingWrapper}>
@@ -49,13 +55,6 @@ const ProductDetailsScreen = ({ route, navigation }) => {
                 <Ionicons name="heart-outline" size={20} color={Colors.black} />
               </TouchableOpacity>
             </Animated.View>
-
-            <Animated.Text
-              entering={FadeInDown.delay(700).duration(500)}
-              style={styles.title}
-            >
-              {product.title}
-            </Animated.Text>
 
             <Animated.View
               entering={FadeInDown.delay(900).duration(500)}
@@ -188,7 +187,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 5,
+    marginTop: 5,
   },
   rating: {
     marginLeft: 5,

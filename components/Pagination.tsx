@@ -31,15 +31,15 @@ export default Pagination;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    height: 60,
+    height: 40,
     justifyContent: "center",
     alignItems: "center",
   },
   paginationDots: {
-    width: 30,
-    height: 4,
+    width: 8,
+    height: 8,
     margin: 3,
-    borderRadius: 5,
+    borderRadius: 50,
     backgroundColor: "#C7C8CC",
   },
 });

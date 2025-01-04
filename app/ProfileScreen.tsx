@@ -40,7 +40,7 @@ const ProfileScreen = (props: Props) => {
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Ionicons name="heart-outline" size={22} color={Colors.primary} />
-          <Text style={styles.buttonText}>Your Wishlist</Text>
+          <Text style={styles.buttonText}>Favorites</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Ionicons name="card-outline" size={22} color={Colors.primary} />
