@@ -83,6 +83,8 @@ const UserStack = () => {
         component={ProfileScreen}
         options={{
           title: "Profile",
+          headerShown: true,
+          headerTransparent: true,
           tabBarIcon: ({ color }) => (
             <Ionicons name="person-outline" size={24} color={color} />
           ),
